@@ -4,6 +4,7 @@ const UniqueValidator = require("mongoose-unique-validator");
 const GuruSchema = Mongoose.Schema(
   {
     username: { type: String, unique: true },
+    fullname: { type: String },
     email: { type: String, unique: true },
     password: String,
     mapel: [{ type: Mongoose.Schema.Types.ObjectId, ref: "Mapel" }],

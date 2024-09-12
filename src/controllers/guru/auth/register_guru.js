@@ -2,10 +2,10 @@ const EncryptId = require("../../../commons/encrypt");
 const GuruModel = require("../../../models/guru");
 
 const RegisterGuru = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, fullname } = req.body;
 
   // VALIDASI DATA KOSONG
-  if (!username || !email || !password ) {
+  if (!username || !email || !password || !fullname) {
     return res.status(400).send({
       code: res.statusCode,
       message: "Data Tidak Boleh Kosong!",
@@ -40,6 +40,7 @@ const RegisterGuru = async (req, res) => {
   try {
     const DataRequest = GuruModel({
       username: username,
+      fullname: fullname,
       email: email,
       password: EncryptId(password),
     });

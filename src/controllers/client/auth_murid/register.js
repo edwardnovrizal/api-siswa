@@ -3,10 +3,10 @@ const GuruModel = require("../../../models/guru");
 const MuridModel = require("../../../models/murid");
 
 const Register = async (req, res) => {
-  const { id_guru, username, email, password } = req.body;
+  const { id_guru, username, email, password, fullname } = req.body;
 
   // VALIDASI DATA KOSONG
-  if (!username || !email || !password || !id_guru) {
+  if (!username || !email || !password || !id_guru || !fullname) {
     return res.status(400).send({
       code: res.statusCode,
       message: "Data Tidak Boleh Kosong!",
@@ -50,12 +50,12 @@ const Register = async (req, res) => {
 
     const DataRequest = MuridModel({
       username: username,
+      fullname: fullname,
       email: email,
       password: EncryptId(password),
       guru: id_guru,
     });
     const Respone = await DataRequest.save();
-    console.log(Respone);
 
     await GuruModel.findById(id_guru).updateOne({ $push: { murid: Respone._id } });
     return res.status(200).send({

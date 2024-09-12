@@ -3,7 +3,8 @@ const Mongoose = require("mongoose");
 const MuridSchema = Mongoose.Schema(
   {
     username: { type: String, unique: true },
-    email: String,
+    fullname: { type: String },
+    email: { type: String, unique: true },
     password: String,
     guru: { type: Mongoose.Schema.Types.ObjectId, ref: "Guru" }, // Setiap Mapel terkait dengan satu Guru
   },
