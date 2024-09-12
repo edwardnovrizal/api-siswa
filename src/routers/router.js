@@ -21,6 +21,7 @@ const { ReadClientSoal } = require("../controllers/client/read/client_soal");
 const { DeleteSoal } = require("../controllers/guru/soal/delete_soal");
 const { ReadGuruAdmin } = require("../controllers/admin/guru/read_guru");
 const { DeleteGuruAdmin } = require("../controllers/admin/guru/delete_guru");
+const { ReadProfilClient } = require("../controllers/client/read/client_profil");
 
 // ADMIN
 router.get("/admin/guru", ReadGuruAdmin);
@@ -49,5 +50,6 @@ router.post("/client/login", Login);
 router.get("/client/guru", ReadGuruClient);
 router.get("/client/mapel", VerifyToken, ReadMapelClient);
 router.get("/client/soal", VerifyToken, ReadClientSoal);
+router.get("/client/profil", VerifyToken, ReadProfilClient);
 
 module.exports = router;
