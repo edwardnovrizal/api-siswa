@@ -19,6 +19,12 @@ const VerifyToken = (req, res, next) => {
     }
     return next();
   } catch (err) {
+    if (err.name === "TokenExpiredError") {
+      return res.status(401).send({
+        code: res.statusCode,
+        message: err.message,
+      });
+    }
     return res.status(500).send({
       code: res.statusCode,
       message: "Invalid Token",
