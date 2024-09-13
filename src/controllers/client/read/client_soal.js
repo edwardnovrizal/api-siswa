@@ -1,3 +1,5 @@
+const SoalModel = require("../../../models/soal");
+
 const ReadClientSoal = async (req, res) => {
   const { id_mapel } = req.query;
 

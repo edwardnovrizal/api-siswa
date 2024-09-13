@@ -5,7 +5,18 @@ const SoalSchema = Mongoose.Schema(
   {
     pertanyaan: String,
     gambar: String,
-    opsi: [String], // Opsi jawaban
+    opsi: [
+      {
+        pilihan: {
+          type: String,
+          required: true,
+        },
+        value: {
+          type: String,
+          required: true,
+        },
+      },
+    ], // Opsi jawaban
     jawaban: String, // Jawaban benar
     id_mapel: { type: Mongoose.Schema.Types.ObjectId, ref: "Mapel" }, // Soal terkait dengan satu Mapel
   },

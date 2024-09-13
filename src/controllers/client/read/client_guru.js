@@ -2,7 +2,7 @@ const GuruModel = require("../../../models/guru");
 
 const ReadGuruClient = async (req, res) => {
   try {
-    const Respone = await GuruModel.find({}, { username: 1, email: 1 });
+    const Respone = await GuruModel.find({}, { username: 1, email: 1, fullname: 1 });
 
     return res.status(200).send({
       code: res.statusCode,

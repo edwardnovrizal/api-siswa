@@ -18,7 +18,6 @@ const LoginGuru = async (req, res) => {
         code: res.statusCode,
         message: "Invalid Username!",
       });
-    console.log(Respone);
 
     bcrypt.compare(password, Respone.password, function (err, result) {
       if (!result) {
