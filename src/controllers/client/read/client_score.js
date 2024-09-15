@@ -7,6 +7,13 @@ const ReadClientScore = async (req, res) => {
   try {
     const Respone = await ScoreModel.findOne({ mapel: id_mapel, murid: id_murid });
 
+    if (Respone == null) {
+      return res.status(404).send({
+        code: res.statusCode,
+        message: "Data Score Tidak Ditemukan",
+      });
+    }
+
     return res.status(200).send({
       code: res.statusCode,
       message: "Berhasil Get Data Score",
