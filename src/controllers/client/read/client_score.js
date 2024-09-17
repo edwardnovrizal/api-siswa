@@ -8,7 +8,7 @@ const ReadClientScore = async (req, res) => {
 
   try {
     const jumlahSoal = await SoalModel.countDocuments({ id_mapel });
-    const Respone = await JawabanModel.findOne({ mapel: id_mapel, murid: id_murid });
+    const Respone = await JawabanModel.findOne({ id_mapel, id_murid });
 
     if (Respone == null) {
       return res.status(404).send({
@@ -17,7 +17,7 @@ const ReadClientScore = async (req, res) => {
       });
     }
     const result = {
-      nilai: JawabanModel.skor_total,
+      nilai: Respone.skor_total,
       jumlah_soal: jumlahSoal,
     };
     return res.status(200).send({
