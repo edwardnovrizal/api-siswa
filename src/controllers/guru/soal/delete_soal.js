@@ -14,6 +14,20 @@ const DeleteSoal = async (req, res) => {
         message: "Guru tidak ditemukan",
       });
 
+    const soal = await SoalModel.findById(id_soal).populate("id_mapel");
+    if (!soal)
+      return res.status(404).send({
+        code: res.statusCode,
+        message: "Data Soal tidak ditemukan",
+      });
+
+    const mapel = await MapelModel.findOne({ _id: soal.id_mapel, guru: id_guru });
+    if (!mapel)
+      return res.status(404).send({
+        code: res.statusCode,
+        message: "Soal pada mapel ini tidak ditemukan",
+      });
+
     const Respone = await SoalModel.deleteOne({ _id: id_soal });
     await MapelModel.updateMany({ soal: id_soal }, { $pull: { soal: id_soal } });
     return res.status(200).send({

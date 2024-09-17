@@ -17,8 +17,8 @@ const SoalSchema = Mongoose.Schema(
         },
       },
     ], // Opsi jawaban
-    jawaban: String, // Jawaban benar
-    id_mapel: { type: Mongoose.Schema.Types.ObjectId, ref: "Mapel" }, // Soal terkait dengan satu Mapel
+    jawaban: String,
+    id_mapel: { type: Mongoose.Schema.Types.ObjectId, ref: "Mapel" }, 
   },
   {
     timestamps: {

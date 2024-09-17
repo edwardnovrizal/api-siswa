@@ -1,10 +1,11 @@
 const GuruModel = require("../../../models/guru");
+const JawabanModel = require("../../../models/jawaban");
 const MapelModel = require("../../../models/mapel");
 const SoalModel = require("../../../models/soal");
 
-const ReadSoal = async (req, res) => {
+const JawabanMuridByMapel = async (req, res) => {
   const { id_guru } = req.guru;
-  const { id_mapel } = req.query;
+  const { id_mapel, id_murid } = req.query;
 
   try {
     const guru = await GuruModel.findById(id_guru);
@@ -13,7 +14,6 @@ const ReadSoal = async (req, res) => {
         code: res.statusCode,
         message: "Guru tidak ditemukan",
       });
-
     const mapel = await MapelModel.findOne({ _id: id_mapel, guru: id_guru });
     if (!mapel)
       return res.status(404).send({
@@ -21,12 +21,25 @@ const ReadSoal = async (req, res) => {
         message: "Mapel tidak ditemukan",
       });
 
-    const Respone = await SoalModel.find({ id_mapel: id_mapel});
+    const hasilMapel = await JawabanModel.findOne({ id_mapel, id_murid }).populate("id_murid").populate("jawaban.id_soal");
+    if (!hasilMapel) {
+      return res.status(404).json({ code: res.statusCode, message: "Murid ini belum mengerjakan soal untuk mapel ini" });
+    }
+
+    const response = {
+      murid: hasilMapel.id_murid.fullname,
+      skor: hasilMapel.skor_total,
+      jawaban: hasilMapel.jawaban.map((j) => ({
+        soal: j.id_soal.pertanyaan,
+        jawaban_murid: j.jawaban_murid,
+        poin: j.nilai,
+      })),
+    };
 
     return res.status(200).send({
       code: res.statusCode,
-      message: "Berhasil Get Data Soal",
-      data: Respone,
+      message: "Berhasil Read Data Jawaban Berdasarkan Mapel",
+      data: response,
     });
   } catch (error) {
     return res.status(400).send({
@@ -37,5 +50,5 @@ const ReadSoal = async (req, res) => {
 };
 
 module.exports = {
-  ReadSoal,
+  JawabanMuridByMapel,
 };

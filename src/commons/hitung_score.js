@@ -12,12 +12,14 @@ async function HitungScore(id_murid, id_mapel, jawaban) {
 
     jawaban.forEach((jawabanItem) => {
       const soalDitemukan = soalList.find((s) => s.id === jawabanItem.soal);
+ 
       if (soalDitemukan && soalDitemukan.jawaban === jawabanItem.pilihan) {
         totalScore++;
       }
     });
 
     const existingScore = await ScoreModel.findOne({ murid: id_murid, mapel: id_mapel });
+    
     if (existingScore) {
       existingScore.nilai = totalScore;
       await existingScore.save();

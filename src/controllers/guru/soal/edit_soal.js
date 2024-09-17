@@ -1,4 +1,5 @@
 const GuruModel = require("../../../models/guru");
+const MapelModel = require("../../../models/mapel");
 const SoalModel = require("../../../models/soal");
 
 const EditSoal = async (req, res) => {
@@ -11,6 +12,20 @@ const EditSoal = async (req, res) => {
       return res.status(404).send({
         code: res.statusCode,
         message: "Guru tidak ditemukan",
+      });
+
+    const soal = await SoalModel.findById(id_soal).populate("id_mapel");
+    if (!soal)
+      return res.status(404).send({
+        code: res.statusCode,
+        message: "Data Soal tidak ditemukan",
+      });
+
+    const mapel = await MapelModel.findOne({ _id: soal.id_mapel, guru: id_guru });
+    if (!mapel)
+      return res.status(404).send({
+        code: res.statusCode,
+        message: "Soal pada mapel ini tidak ditemukan",
       });
 
     const Respone = await SoalModel.findByIdAndUpdate(

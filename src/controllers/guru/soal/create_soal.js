@@ -14,12 +14,10 @@ const CreateSoal = async (req, res) => {
         message: "Guru tidak ditemukan",
       });
 
-    const mapel = await MapelModel.findById(id_mapel);
+    const mapel = await MapelModel.findOne({ _id: id_mapel, guru: id_guru });
     if (!mapel)
       return res.status(404).send({
         code: res.statusCode,
-        method: req.method,
-        endpoint: req.url,
         message: "Mapel tidak ditemukan",
       });
 
