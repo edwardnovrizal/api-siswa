@@ -21,6 +21,8 @@ const CreateJawaban = async (req, res) => {
       });
     }
 
+     await JawabanModel.deleteMany({ id_mapel: id_mapel, id_murid: id_murid });
+
     const soalIds = jawaban.map((j) => j.soal);
     const soalList = await SoalModel.find({ _id: { $in: soalIds }, id_mapel: id_mapel });
     if (soalList.length !== soalIds.length) {
@@ -30,19 +32,17 @@ const CreateJawaban = async (req, res) => {
       });
     }
 
-    for (const j of jawaban) {
+    jawaban.forEach((j) => {
       const soal = soalList.find((s) => s._id.toString() === j.soal);
-      let skor = 0;
-      if (soal.jawaban === j.pilihan) {
-        skor = 1;
-      }
+      let skor = soal.jawaban === j.pilihan ? 1 : 0;
       totalSkor += skor;
       jawabanDetails.push({
         id_soal: j.soal,
         jawaban_murid: j.pilihan,
         nilai: skor,
       });
-    }
+    });
+
     const hasilMapel = new JawabanModel({
       id_mapel: id_mapel,
       id_murid: id_murid,
