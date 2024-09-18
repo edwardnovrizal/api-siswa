@@ -15,7 +15,7 @@ const ReadClientScore = async (req, res) => {
         code: res.statusCode,
         message: "Data Score Tidak Ditemukan",
       });
-    }
+    } 
     const result = {
       nilai: Respone.skor_total,
       jumlah_soal: jumlahSoal,

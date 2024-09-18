@@ -24,8 +24,7 @@ const { DeleteGuruAdmin } = require("../controllers/admin/guru/delete_guru");
 const { ReadProfilClient } = require("../controllers/client/read/client_profil");
 const { CreateJawaban } = require("../controllers/client/jawaban/client_jawaban");
 const { ReadClientScore } = require("../controllers/client/read/client_score");
-const { JawabanMurid, JawabanMuridByMapel } = require("../controllers/guru/murid/jawaban_murid");
-const { ScoreMurid } = require("../controllers/guru/murid/score_murid");
+const { JawabanMuridByMapel } = require("../controllers/guru/murid/jawaban_murid");
 
 // ADMIN
 router.get("/admin/guru", ReadGuruAdmin);
@@ -48,7 +47,6 @@ router.delete("/guru/soal", VerifyToken, DeleteSoal);
 router.get("/guru/murid", VerifyToken, ReadMurid);
 router.delete("/guru/murid", VerifyToken, DeleteMurid);
 router.get("/guru/murid/jawaban", VerifyToken, JawabanMuridByMapel);
-router.get("/guru/murid/score", VerifyToken, ScoreMurid);
 
 // Client
 router.post("/client/register", Register);
