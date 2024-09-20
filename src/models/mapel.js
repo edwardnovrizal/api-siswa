@@ -4,6 +4,7 @@ const UniqueValidator = require("mongoose-unique-validator");
 const MapelSchema = Mongoose.Schema(
   {
     title: { type: String, },
+    icon: { type: String, },
     guru: { type: Mongoose.Schema.Types.ObjectId, ref: "Guru" }, // Setiap Mapel terkait dengan satu Guru
     soal: [{ type: Mongoose.Schema.Types.ObjectId, ref: "Soal" }], // Mapel memiliki banyak Soal
   },

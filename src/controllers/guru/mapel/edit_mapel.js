@@ -2,7 +2,7 @@ const GuruModel = require("../../../models/guru");
 const MapelModel = require("../../../models/mapel");
 
 const EditMapel = async (req, res) => {
-  const { title, id_mapel } = req.body;
+  const { title, icon, id_mapel } = req.body;
   const { id_guru } = req.guru;
   try {
     const guru = await GuruModel.findById(id_guru);
@@ -18,6 +18,7 @@ const EditMapel = async (req, res) => {
       id_mapel,
       {
         title,
+        icon,
         guru: id_guru,
       },
       { new: true, runValidators: true }

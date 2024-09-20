@@ -2,7 +2,7 @@ const GuruModel = require("../../../models/guru");
 const MapelModel = require("../../../models/mapel");
 
 const CreateMapel = async (req, res) => {
-  const { title } = req.body;
+  const { title, icon } = req.body;
   const { id_guru } = req.guru;
   try {
     const guru = await GuruModel.findById(id_guru);
@@ -16,6 +16,7 @@ const CreateMapel = async (req, res) => {
 
     const DataRequest = MapelModel({
       title,
+      icon,
       guru: id_guru,
     });
 
