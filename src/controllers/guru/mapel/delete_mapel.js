@@ -1,4 +1,5 @@
 const GuruModel = require("../../../models/guru");
+const JawabanModel = require("../../../models/jawaban");
 const MapelModel = require("../../../models/mapel");
 const SoalModel = require("../../../models/soal");
 
@@ -16,7 +17,7 @@ const DeleteMapel = async (req, res) => {
 
     // 1. Hapus semua Soal yang terkait dengan Mapel yang dihapus
     await SoalModel.deleteMany({ id_mapel: { $in: id_mapel } });
-
+    await JawabanModel.deleteMany({ id_mapel: { $in: id_mapel } });
     // 2. Hapus Guru itu sendiri
     const Respone = await MapelModel.deleteOne({ _id: id_mapel });
 
