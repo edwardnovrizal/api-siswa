@@ -29,6 +29,7 @@ const ReadProfilClient = async (req, res) => {
 
     const result = {
       fullname: Respone.fullname,
+      username : Respone.username,
       email: Respone.email,
       guru: {
         fullname: Respone.guru.fullname ?? "Guru Tidak Tersedia",

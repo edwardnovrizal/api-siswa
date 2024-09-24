@@ -26,7 +26,7 @@ const EditMapel = async (req, res) => {
 
     return res.status(200).send({
       code: res.statusCode,
-      message: "Berhasil Create Data Mata Pelajaran",
+      message: "Berhasil Edit Data Mata Pelajaran",
       data: Respone,
     });
   } catch (error) {

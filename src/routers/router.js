@@ -25,6 +25,7 @@ const { ReadProfilClient } = require("../controllers/client/read/client_profil")
 const { CreateJawaban } = require("../controllers/client/jawaban/client_jawaban");
 const { ReadClientScore } = require("../controllers/client/read/client_score");
 const { JawabanMuridByMapel } = require("../controllers/guru/murid/jawaban_murid");
+const { EditProfilClient } = require("../controllers/client/profil/edit_profil");
 
 // ADMIN
 router.get("/admin/guru", ReadGuruAdmin);
@@ -55,6 +56,7 @@ router.get("/client/guru", ReadGuruClient);
 router.get("/client/mapel", VerifyToken, ReadMapelClient);
 router.get("/client/soal", VerifyToken, ReadClientSoal);
 router.get("/client/profil", VerifyToken, ReadProfilClient);
+router.put("/client/profil", VerifyToken, EditProfilClient);
 router.post("/client/jawaban", VerifyToken, CreateJawaban);
 router.get("/client/score", VerifyToken, ReadClientScore);
 
